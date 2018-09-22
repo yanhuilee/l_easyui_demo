@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Window Layout - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../demo.css"> -->
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body style="height:100%;width:100%;overflow:hidden;border:none;">
+	<h2>Window</h2>
+	<div id="win" class="easyui-window" title="My Window" closed="false" style="width:300px;height:180px;">
+	<form style="padding:10px 20px 10px 40px;">
+		<p>姓名:<input type="text" name="" style="margin:5px"></p>
+		<p>密码:<input type="password" name="" style="margin:5px"></p>
+		<div style="padding:5px;text-align:center;">
+			<a href="#" class="easyui-linkbutton" icon="icon-ok">OK</a>
+			<a href="#" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	// $('#win').window('open');
+	$('#win').window({
+		// collapsible: false,
+		tools: [{
+			iconCls: 'icon-add',
+			handler: function () {
+				alert('add');
+			}
+		}]
+	});
+
+</script>
+</body>
+</html>

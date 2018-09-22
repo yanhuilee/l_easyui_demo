@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../demo.css"> -->
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>DataGrid</h2>
+
+	<div style="margin-bottom:20px">
+		<a href="#" onclick="getSelected()">GetSelected</a>
+		<a href="#" onclick="getSelections()">GetSelections</a>
+	</div>
+
+	<table id="tt" title="Column Group" class="easyui-datagrid" style="width:550px;height:400px" url="data/datagrid_data.json" 
+		toolbar="#tb"
+		singleSelect="true" 
+		rownumbers="true" 
+		pagination="true" method="get">
+		<thead>
+			<tr>
+				<th rowspan="2" field="ck" checkbox="true"></th>
+				<th rowspan="2" field="itemid" width="80">Item ID</th>
+				<th rowspan="2" field="productid">Product ID</th>
+				<th colspan="4">Item Details</th>
+			</tr>
+			<tr>
+				<th field="listprice" width="80" align="right" formatter="formatPrice">List Price</th>
+				<th field="unitcost" width="80" align="right">Unit Cost</th>
+				<th field="attr1" width="100">Attribute</th>
+				<th field="status" width="60" align="center">Status</th>
+			</tr>
+		</thead>
+	</table>
+
+	<!-- 添加查询功能 -->
+	<div id="tb" style="padding: 3px">
+		<div style="margin: 5px">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:alert('Add')">Add</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="javascript:alert('Cut')">Cut</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:alert('Save')">Save</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove"></a>
+		</div>
+		<div style="margin: 5px">
+			Date From: <input class="easyui-datebox" style="width:80px">
+			Language: 
+			<input class="easyui-combobox" style="width:100px" url="data/combobox_data.json"
+				valueField="id" textField="text" method="get">
+		</div>
+		<div style="margin: 5px">
+			<span>Item ID:</span>
+			<input id="itemid" style="line-height:24px;border:1px solid #ccc">
+			<span>Product ID:</span>
+			<input id="productid" style="line-height:26px;border:1px solid #ccc">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">Search</a>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	function doSearch() {
+		$('#tt').datagrid('load', {
+			itemid: $('#itemid').val(),
+			productid: $('#productid').val()
+		})
+	}
+
+	function getSelected() {
+		var row = $('#tt').datagrid('getSelected');
+		if (row) {
+			alert('Item ID: ' + row.itemid);
+		} else {
+			alert('nothing');
+		}
+	}
+
+	// 格式化数据
+	function formatPrice(val, row) {
+		if (val < 20) {
+			return '<span style="color:red;">('+ val +')</span>';
+		}
+		return val;
+	}
+
+	// 分页
+	$(function() {
+		var parger = $('#tt').datagrid('getPager');
+		parger.pagination({
+			showPageList: true,
+			buttons: [{
+				iconCls: 'icon-add',
+				handler: function() {
+					alert('add');
+				}
+			}],
+			onBeforeRefresh: function() {
+				alert('before refresh');
+				return true;
+			}
+		})
+	});
+</script>
+</body>
+</html>
