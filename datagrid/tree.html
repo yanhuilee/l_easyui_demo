@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tree - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../demo.css"> -->
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Tree</h2>
+	<div style="margin: 10px">
+		<a href="#" onclick="append_nodes()">append_nodes</a>
+	</div>
+	<div style="width:200px;height:300px;border:1px solid #ccc;">
+		<ul id="tt" class="easyui-tree" url="data/tree_data.json" 
+			checkbox="true"
+			dnd="true"
+			method="get">
+			
+		</ul>
+	</div>
+	
+	<div style="margin:10px;">
+	<table id="test" title="Folder Browser" class="easyui-treegrid" style="width:400px;height:300px" url="data/treegrid_data.json" 
+		idField="id"
+		treeField="name"
+		rownumbers="true"
+		method="get">
+		<thead>
+			<tr>
+				<th field="name" width="160">Name</th>
+				<th field="size" width="60" align="right">Size</th>
+				<th field="date" width="100">Modified Date</th>
+			</tr>
+		</thead>
+	</table>
+	</div>
+
+<script type="text/javascript">
+function append_nodes() {
+	var node = $('#tt').tree('getSelected');
+	if (node) {
+		var nodes = [
+		{
+			"id": 13,
+			"text": "Raspberry"
+		},
+		{
+			"id": 14,
+			"text": "Cantaloupe"
+		}];
+		$('#tt').tree('append', {
+			parent: node.target,
+			data: nodes
+		})
+	}
+}
+</script>
+</body>
+</html>
